@@ -61,7 +61,3 @@ public class Course {
         this.inactivation_date = inactivation_date;
     }
 }
-
-enum Status {
-    ACTIVE, INACTIVE
-}
