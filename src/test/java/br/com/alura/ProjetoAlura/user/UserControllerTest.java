@@ -87,7 +87,7 @@ class UserControllerTest {
                         .content(objectMapper.writeValueAsString(newStudentUserDTO)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.field").value("email"))
-                .andExpect(jsonPath("$.message").value("Email já cadastrado no sistema"));
+                .andExpect(jsonPath("$.message").value("Email already registered in the system"));
     }
 
     @Test
