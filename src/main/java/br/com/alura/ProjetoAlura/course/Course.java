@@ -28,7 +28,7 @@ public class Course {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private LocalDateTime inactiveAt;
+    private LocalDateTime inactivation_date;
 
     public Course() {}
 
@@ -38,7 +38,7 @@ public class Course {
         this.description = description;
         this.instructor = instructor;
         this.status = Status.ACTIVE;
-        this.inactiveAt = null;
+        this.inactivation_date = null;
     }
 
     public String getCode() { return code; }
@@ -51,7 +51,7 @@ public class Course {
 
     public Status getStatus() { return status; }
 
-    public LocalDateTime getInactiveAt() { return inactiveAt; }
+    public LocalDateTime getInactiveAt() { return inactivation_date; }
 }
 
 enum Status {

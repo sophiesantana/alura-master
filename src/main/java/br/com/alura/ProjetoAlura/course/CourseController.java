@@ -32,14 +32,15 @@ public class CourseController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Code must be unique");
         }
 
-        if(userRepository.existsByEmail(newCourse.getInstructorEmail())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ErrorItemDTO("email", "Email already registered in the system"));
-        }
-
         User instructor = userRepository.findByEmail(newCourse.getInstructorEmail());
         if (instructor == null || instructor.getRole() != Role.INSTRUCTOR) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid instructor");
+        }
+
+        if (!instructor.getEmail().equals(newCourse.getInstructorEmail())) {
+            System.out.println(newCourse.getInstructorEmail());
+            System.out.println(instructor.getEmail());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid instructor email");
         }
 
         Course course = new Course(
