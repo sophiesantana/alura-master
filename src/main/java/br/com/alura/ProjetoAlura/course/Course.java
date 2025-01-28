@@ -52,6 +52,14 @@ public class Course {
     public Status getStatus() { return status; }
 
     public LocalDateTime getInactiveAt() { return inactivation_date; }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setInactivation_date(LocalDateTime inactivation_date) {
+        this.inactivation_date = inactivation_date;
+    }
 }
 
 enum Status {
