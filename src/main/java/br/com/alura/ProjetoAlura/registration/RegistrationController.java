@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class RegistrationController {
@@ -59,34 +60,18 @@ public class RegistrationController {
 
     @GetMapping("/registration/report")
     public ResponseEntity<List<RegistrationReportItem>> report() {
-        List<RegistrationReportItem> items = new ArrayList<>();
 
-        // TODO: Implementar a Questão 4 - Relatório de Cursos Mais Acessados aqui...
+        List<Object[]> results = registrationRepository.getCourseRegistrationReport();
 
-        // Dados fictícios abaixo que devem ser substituídos
-        items.add(new RegistrationReportItem(
-                "Java para Iniciantes",
-                "java",
-                "Charles",
-                "charles@alura.com.br",
-                10L
-        ));
-
-        items.add(new RegistrationReportItem(
-                "Spring para Iniciantes",
-                "spring",
-                "Charles",
-                "charles@alura.com.br",
-                9L
-        ));
-
-        items.add(new RegistrationReportItem(
-                "Maven para Avançados",
-                "maven",
-                "Charles",
-                "charles@alura.com.br",
-                9L
-        ));
+        List<RegistrationReportItem> items = results.stream()
+                .map(result -> new RegistrationReportItem(
+                        (String) result[0],
+                        (String) result[1],
+                        (String) result[2],
+                        (String) result[3],
+                        ((Number) result[4]).longValue()
+                ))
+                .collect(Collectors.toList());
 
         return ResponseEntity.ok(items);
     }
